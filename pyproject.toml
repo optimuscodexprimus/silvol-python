@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "silvol"
+dynamic = ["version"]
+description = "Python SDK for the Silvol inference API — OpenAI-compatible, decentralised GPU."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Silvol", email = "hello@silvol.ai" }]
+keywords = ["llm", "inference", "openai", "nosana", "gpu", "silvol"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+  "openai>=1.0",
+  "httpx>=0.25",
+]
+
+[project.optional-dependencies]
+langchain = ["langchain-openai>=0.1"]
+crewai    = ["crewai>=0.30"]
+all       = ["langchain-openai>=0.1", "crewai>=0.30"]
+dev       = ["pytest>=7", "build", "twine"]
+
+[project.urls]
+Homepage      = "https://silvol.ai"
+Documentation = "https://silvol.ai/docs"
+Repository    = "https://github.com/optimuscodexprimus/silvol-python"
+"Bug Tracker" = "https://github.com/optimuscodexprimus/silvol-python/issues"
+
+[tool.hatch.version]
+path = "src/silvol/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/silvol"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
