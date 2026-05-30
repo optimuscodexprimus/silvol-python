@@ -8,6 +8,7 @@ the Silvol inference gateway by default.
 from openai import OpenAI, AsyncOpenAI
 
 from ._version import __version__
+from .finetune import Finetune, AsyncFinetune
 
 __all__ = ["Silvol", "AsyncSilvol"]
 
@@ -28,6 +29,8 @@ class Silvol(OpenAI):
             messages=[{"role": "user", "content": "Hello"}],
         )
         print(resp.choices[0].message.content)
+
+    Fine-tuning is available at ``client.finetune`` — see ``silvol.finetune``.
     """
 
     DEFAULT_BASE_URL: str = _DEFAULT_BASE_URL
@@ -43,6 +46,7 @@ class Silvol(OpenAI):
             base_url=base_url or self.DEFAULT_BASE_URL,
             **kwargs,
         )
+        self.finetune: Finetune = Finetune(self)
 
 
 class AsyncSilvol(AsyncOpenAI):
@@ -63,6 +67,8 @@ class AsyncSilvol(AsyncOpenAI):
             print(resp.choices[0].message.content)
 
         asyncio.run(main())
+
+    Fine-tuning is available at ``client.finetune`` — see ``silvol.finetune``.
     """
 
     DEFAULT_BASE_URL: str = _DEFAULT_BASE_URL
@@ -78,3 +84,4 @@ class AsyncSilvol(AsyncOpenAI):
             base_url=base_url or self.DEFAULT_BASE_URL,
             **kwargs,
         )
+        self.finetune: AsyncFinetune = AsyncFinetune(self)
