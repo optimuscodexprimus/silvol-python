@@ -9,7 +9,7 @@
 
 - **Purpose:** Thin Python SDK wrapping the Silvol OpenAI-compatible API + fine-tuning API
 - **PyPI package name:** `silvol`
-- **Version:** 0.2.0 — added fine-tuning client at `client.finetune` (2026-05-30)
+- **Version:** 0.2.1 — `SILVOL_API_KEY` env var support + README accuracy fixes (2026-06-18); 0.2.0 added fine-tuning client at `client.finetune` (2026-05-30)
 - **GitHub:** `https://github.com/optimuscodexprimus/silvol-python`
 - **Local clone:** `C:\Users\otien\AppData\Local\Temp\silvol-python`
 - **Default base URL:** `https://api.silvol.ai/v1`
@@ -21,12 +21,12 @@ src/silvol/
   __init__.py          Exports: Silvol, AsyncSilvol, Finetune, AsyncFinetune, FinetuneError, __version__
   client.py            Silvol (subclasses openai.OpenAI) + .finetune; AsyncSilvol (subclasses openai.AsyncOpenAI) + .finetune
   finetune.py          Finetune, AsyncFinetune — wraps /v1/finetune/* endpoints
-  _version.py          __version__ = "0.2.0"
+  _version.py          __version__ = "0.2.1"
   integrations/
     langchain.py       SilvolChat() → ChatOpenAI wired to Silvol gateway
     crewai.py          SilvolLLM()  → crewai.LLM wired to Silvol gateway
 tests/
-  test_client.py       5 smoke tests (client init + base URL)
+  test_client.py       8 smoke tests (client init, base URL, SILVOL_API_KEY env)
   test_finetune.py     7 smoke tests (attribute attached, dataset encoder, exports)
 .github/workflows/
   publish.yml          push to main → TestPyPI; tagged release → PyPI (OIDC)

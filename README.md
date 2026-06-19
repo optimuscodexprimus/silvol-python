@@ -29,7 +29,7 @@ pip install silvol[all]         # both
 ```python
 from silvol import Silvol
 
-client = Silvol(api_key="sk-svl-...")          # or set SILVOL_API_KEY env var
+client = Silvol(api_key="sk-svl-...")          # or set the SILVOL_API_KEY env var
 
 resp = client.chat.completions.create(
     model="DeepSeek-R1-Distill-Qwen-7B",
@@ -93,19 +93,24 @@ researcher = Agent(
 
 | Model ID | Context | Notes |
 |---|---|---|
-| `DeepSeek-R1-Distill-Qwen-7B` | 32k | Always-on (free tier) |
-| `llama-3.1-70b` | 128k | On-demand deployment |
-| `qwen-2.5-coder-32b` | 32k | On-demand deployment |
+| `DeepSeek-R1-Distill-Qwen-7B` | 32k | Always-on — call directly |
+| `meta-llama/Llama-3.1-70B-Instruct` | 128k | On-demand — deploy first |
+| `Qwen/Qwen2.5-Coder-32B-Instruct` | 32k | On-demand — deploy first |
 
-Full list: `GET https://api.silvol.ai/v1/models`
+`DeepSeek-R1-Distill-Qwen-7B` is the always-on model returned by
+`GET https://api.silvol.ai/v1/models` — call it directly. Other models are served
+**on demand**: provision a dedicated GPU deployment first (from the
+[dashboard](https://silvol.ai/dashboard) or the deployments API), then call it by the
+HuggingFace model ID you deployed.
 
 ---
 
 ## Authentication
 
 Get your API key from the [Silvol Dashboard](https://silvol.ai/dashboard).
-Keys are prefixed `sk-svl-`. Pass it as `api_key=` or set the `OPENAI_API_KEY`
-environment variable (the SDK checks it automatically).
+Keys are prefixed `sk-svl-`. Pass it as `api_key=`, or set the `SILVOL_API_KEY`
+environment variable (the SDK reads it automatically). `OPENAI_API_KEY` also works
+as a fallback.
 
 ---
 

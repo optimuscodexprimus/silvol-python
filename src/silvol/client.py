@@ -5,6 +5,8 @@ Drop-in replacements for openai.OpenAI / openai.AsyncOpenAI that point at
 the Silvol inference gateway by default.
 """
 
+import os
+
 from openai import OpenAI, AsyncOpenAI
 
 from ._version import __version__
@@ -42,7 +44,7 @@ class Silvol(OpenAI):
         **kwargs,
     ) -> None:
         super().__init__(
-            api_key=api_key,
+            api_key=api_key or os.environ.get("SILVOL_API_KEY"),
             base_url=base_url or self.DEFAULT_BASE_URL,
             **kwargs,
         )
@@ -80,7 +82,7 @@ class AsyncSilvol(AsyncOpenAI):
         **kwargs,
     ) -> None:
         super().__init__(
-            api_key=api_key,
+            api_key=api_key or os.environ.get("SILVOL_API_KEY"),
             base_url=base_url or self.DEFAULT_BASE_URL,
             **kwargs,
         )
