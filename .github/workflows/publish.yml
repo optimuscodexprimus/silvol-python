@@ -2,7 +2,7 @@ name: Publish to PyPI
 
 on:
   push:
-    branches: [main]        # → TestPyPI on every push to main
+    branches: [master]      # → TestPyPI on every push to master
   release:
     types: [published]      # → PyPI on tagged GitHub releases
 
@@ -32,7 +32,7 @@ jobs:
   publish-testpypi:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     environment: testpypi
     permissions:
       id-token: write   # OIDC trusted publishing
