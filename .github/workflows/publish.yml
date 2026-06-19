@@ -44,9 +44,11 @@ jobs:
           path: dist/
 
       - name: Publish to TestPyPI
+        continue-on-error: true   # best-effort pre-check — a missing publisher or duplicate version must not fail the run
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
 
   publish-pypi:
     needs: build
